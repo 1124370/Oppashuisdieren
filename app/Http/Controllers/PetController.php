@@ -45,7 +45,7 @@ class PetController extends Controller
         $validated = $request->validate([
             'name'=>'required|string',
             'description'=>'required|string',
-            'type'=>'required|in:cat,dog',
+            'type'=>'required|in:cat,dog,chicken,other',
             'weight'=>'required|numeric',
             'hourly_rate'=>'required|numeric',
             'image'=>'file|max:2048',
@@ -101,7 +101,7 @@ class PetController extends Controller
         $validated = $request->validate([
             'name'=>'required|string',
             'description'=>'required|string',
-            'type'=>'required|in:cat,dog',
+            'type'=>'required|in:cat,dog,chicken,other',
             'weight'=>'required|numeric',
             'hourly_rate'=>'required|numeric',
             'image'=>'file|image|max:2048',

@@ -33,6 +33,9 @@
                 <input type="number" name="hourly_rate" id="hourlyField" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Toevoegen</button>
+            @if ($errors->any())
+                <div class="alert alert-danger">{{ $errors->first() }}</div>
+            @endif
         </form>
     </div>
 </x-layout>
