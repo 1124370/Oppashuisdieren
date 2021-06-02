@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="card col-sm-10 mt-5 mx-auto">
+    <section class="card container">
         <h3 class="card-header">Update je profiel</h3>
         <form action="{{route('user.update',$user->id)}}" method="POST" class="p-2">
             @method('PUT')
@@ -17,5 +17,5 @@
             </div>
             <button type="submit" class="btn btn-primary">Bijwerken</button>
         </form>
-    </div>
+    </section>
 </x-layout>

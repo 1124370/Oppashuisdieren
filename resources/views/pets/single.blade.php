@@ -1,36 +1,34 @@
 <x-layout>
-    <div class="card col-sm-10 mt-5 mx-auto">
-        <div class="row g-0">
-            <div class="col-sm-2">
-                <img src="/storage/pets/{{ $pet->image }}" width="100%" class="img-fluid" />
-            </div>
-            <div class="col-sm">
-                <div class="card-body">
-                    <h3 class="card-title">{{ $pet->name }}, the {{ $pet->type }}</h3>
-                    <p class="card-text">
-                    <h5>Over {{ $pet->name }}</h5>
-                    {{ $pet->description }}
-                    </p>
-                    <p>
-                        Gewicht: {{ $pet->weight }}kg
-                    </p>
-                    <p>
-                        Gevraagd uurtarief: €{{ $pet->hourly_rate }}
-                    </p>
-                    @if (Auth::check() && Auth::user()->admin)
-                        <a href="{{route('pets.delete',$pet)}}" class="btn btn-danger">Verwijder Pet</a>
-                        <a href="{{route('users.delete',$pet->user)}}" class="btn btn-danger">Verban gebruiker</a>
-                    @endif
-                    @if (Auth::check() && Auth::user()->sitter && Auth::user()->id != $pet->owner_id)
-                        <div class="row">
-                            <form class="input-group col-sm p-0 m-1" action="{{ route('pets.sit', $pet) }}">
-                                <input type="text" name="hours" class="form-control" placeholder="Dagen">
-                                <button type="submit" class="btn btn-primary" id="button-addon1">Ja ik wil passen op dit
-                                    huisdier</button>
-                            </form>
-                        </div>
-                    @endif
-                </div>
+    <div class="card card-horizontal container">
+        <div class="col-sm-2">
+            <img src="/storage/pets/{{ $pet->image }}" width="100%" class="img-fluid" />
+        </div>
+        <div class="col-sm">
+            <div class="card-body">
+                <h3 class="card-title">{{ $pet->name }}, the {{ $pet->type }}</h3>
+                <p class="card-text">
+                <h5>Over {{ $pet->name }}</h5>
+                {{ $pet->description }}
+                </p>
+                <p>
+                    Gewicht: {{ $pet->weight }}kg
+                </p>
+                <p>
+                    Gevraagd uurtarief: €{{ $pet->hourly_rate }}
+                </p>
+                @if (Auth::check() && Auth::user()->admin)
+                    <a href="{{ route('pets.delete', $pet) }}" class="btn btn-danger">Verwijder Pet</a>
+                    <a href="{{ route('users.delete', $pet->user) }}" class="btn btn-danger">Verban gebruiker</a>
+                @endif
+                @if (Auth::check() && Auth::user()->sitter && Auth::user()->id != $pet->owner_id)
+                    <div class="row">
+                        <form class="input-group col-sm p-0 m-1" action="{{ route('pets.sit', $pet) }}">
+                            <input type="text" name="hours" class="form-control" placeholder="Dagen">
+                            <button type="submit" class="btn btn-primary" id="button-addon1">Ja ik wil passen op dit
+                                huisdier</button>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
         @if (Auth::check() && Auth::user()->id == $pet->owner_id)

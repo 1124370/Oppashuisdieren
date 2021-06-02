@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="card col-sm-10 mt-5 mx-auto">
+    <div class="card container">
         <h3 class="card-header">Laten we uw oppas account aanmaken</h3>
         <form method="POST" action="/sitters" class="card-body" enctype="multipart/form-data">
             @csrf

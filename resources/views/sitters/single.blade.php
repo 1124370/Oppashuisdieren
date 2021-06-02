@@ -1,36 +1,37 @@
 <x-layout>
-    <div class="col-sm-10 mt-5 mx-auto">
+    <div class="container">
 
-        <div class="card mb-5">
-            <div class="row g-0">
-                <div class="col-sm-2 h-100">
-                    <img src="/storage/sitters/{{ $sitter->image }}" class="img-fluid" />
-                </div>
-                <div class="col-sm">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ $sitter->user->name }}</h3>
-                        @if ($sitter->user->country & $sitter->user->city)
-                            <p class="card-text fw-bold">{{ $sitter->user->country }}, {{ $sitter->user->city }}</p>
-                        @endif
-                        <small class="card-text d-flex align-items-center">
-                            <img height="18px" class="m-1" src="https://img.icons8.com/ios/100/000000/star--v1.png" />
-                            Beoordeling: {{ $sitter->rating }}
-                        </small>
-                        <p class="card-text">
-                        <h5>Over {{ $sitter->user->name }}</h5>
-                        {{ $sitter->description }}
-                        </p>
-                        @if (Auth::check() && Auth::user()->admin)
-                            <a href="{{ route('sitters.delete', $sitter) }}" class="btn btn-danger">Verwijder sitter</a>
-                            <a href="{{ route('users.delete', $sitter->user) }}" class="btn btn-danger">Verban gebruiker</a>
-                        @endif
-                    </div>
+        <section class="card card-horizontal">
+            <figure class="card-image">
+                <img src="/storage/sitters/{{ $sitter->image }}" class="img-fluid" />
+            </figure>
+            <div class="col-sm">
+                <div class="card-body">
+                    <h3 class="card-title">{{ $sitter->user->name }}</h3>
+                    @if ($sitter->user->country & $sitter->user->city)
+                        <p class="card-text fw-bold">{{ $sitter->user->country }}, {{ $sitter->user->city }}</p>
+                    @endif
+                    <small class="card-text d-flex align-items-center">
+                        <img height="18px" class="m-1" src="https://img.icons8.com/ios/100/000000/star--v1.png" />
+                        Beoordeling: {{ $sitter->rating }}
+                    </small>
+                    <p class="card-text">
+                    <h5>Over {{ $sitter->user->name }}</h5>
+                    {{ $sitter->description }}
+                    </p>
+                    @if (Auth::check() && Auth::user()->admin)
+                        <a href="{{ route('sitters.delete', $sitter) }}" class="btn btn-danger">Verwijder sitter</a>
+                        <a href="{{ route('users.delete', $sitter->user) }}" class="btn btn-danger">Verban
+                            gebruiker</a>
+                    @endif
                 </div>
             </div>
-        </div>
+        </section>
         <div class="card mb-5">
-            <h3 class="card-header">Afbeeldingen van je huis</h3>
-            <ul class="list-group list-group-flush list-group-horizontal overflow-auto">
+            <div class="card-header">
+                <h3>Afbeeldingen van je huis</h3>
+            </div>
+            <ul class="card-body list-group list-group-flush list-group-horizontal overflow-auto">
                 @if (Auth::check() && $sitter->user->id == Auth::user()->id)
                     <form class="list-group-item col-6 d-flex flex-column justify-content-center" method="POST"
                         action="{{ route('sitters.photo', $sitter) }}" enctype="multipart/form-data">
@@ -55,15 +56,15 @@
             </div>
             <div class="list-group list-group-flush">
                 @forelse ($sitter->reviews()->paginate(5) as $review)
-                    <div class="list-group-item">
-                        <div class="d-flex">
+                    <section class="list-group-item comment">
+                        <div class="comment-header">
                             <img class="img-fluid rounded-circle p-2 bg-light"
                                 src="https://img.icons8.com/ios/50/000000/pet-commands-summon.png" />
-                            <div class="ms-2 d-flex flex-column justify-content-center">
+                            <div class="comment-header-data">
                                 <small class="text-muted">{{ $review->sender->name }}</small>
                                 <small class="text-muted">{{ $review->created_at }}</small>
                             </div>
-                            <p class="ms-auto">
+                            <p class="comment-header-rating">
                                 <img height="18px" class="m-1"
                                     src="https://img.icons8.com/ios/100/000000/star--v1.png" />{{ $review->rating }}
                             </p>
@@ -71,7 +72,7 @@
                         <p class="pt-2">
                             {{ $review->description }}
                         </p>
-                    </div>
+                    </section>
                 @empty
                     Deze oppas heeft geen recensies
                 @endforelse

@@ -1,42 +1,35 @@
 <x-layout>
-    <div class="card col-sm-10 mt-5 mx-auto">
+    <div class="container card">
 
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header">
             <h3>Huisdieren</h3>
             <a href="{{ route('pets.create') }}" class="btn btn-primary">Voeg je huisdier toe</a>
         </div>
-        <form class="body p-3" method="{{ route('pets.index') }}">
-            <label for="typeField">Filter</label>
-            <div class="input-group">
-                <select name="type" id="typeField" class="form-select">
-                    <option value="">All</option>
-                    <option value="cat">Kat</option>
-                    <option value="dog">Hond</option>
-                    <option value="chicken">Kip/haan</option>
-                    <option value="other">Alle overige dieren</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Filter</button>
-            </div>
+        <form method="{{ route('pets.index') }}" class="filter">
+            <select name="type" id="typeField" class="form-control">
+                <option value="">All</option>
+                <option value="cat">Kat</option>
+                <option value="dog">Hond</option>
+                <option value="chicken">Kip/haan</option>
+                <option value="other">Alle overige dieren</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
         </form>
-        <div class="m-1 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <section class="list">
             @foreach ($pets as $pet)
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="/storage/pets/{{ $pet->image }}" class="card-img-top" style="object-fit: cover;"
-                            alt="{{ $pet->name }} profile picture" height="225">
-                        <div class="card-body">
-                            <h5>{{ $pet->name }}</h5>
-                            <p class="card-text">{{ $pet->description }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="{{ route('pets.show', $pet) }}"
-                                        class="btn btn-sm btn-outline-secondary">View</a>
-                                </div>
+                <figure class="card shadow-sm">
+                    <img src="/storage/pets/{{ $pet->image }}" alt="{{ $pet->name }} profile picture">
+                    <figcaption class="card-body">
+                        <h5>{{ $pet->name }}</h5>
+                        <p class="card-text">{{ $pet->description }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{{ route('pets.show', $pet) }}"
+                                    class="btn btn-sm btn-outline-secondary">View</a>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
             @endforeach
             {{-- <div class="list-group list-group-flush">
                 @forelse ($pets as $pet)
@@ -57,7 +50,7 @@
                     Geen huisdieren gevonden
                 @endforelse
             </div> --}}
-        </div>
+        </section>
         @if ($pets->hasPages())
             <div class="card-footer d-flex justify-content-center">
                 {{ $pets->links() }}

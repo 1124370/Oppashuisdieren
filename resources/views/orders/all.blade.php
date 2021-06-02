@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="col-sm-10 mt-5 mx-auto">
+    <div class="container">
         <div class="card mb-5">
             <div class="card-header d-flex justify-content-between">
                 <h3>Ontvangen afspraken</h3>

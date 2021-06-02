@@ -1,6 +1,8 @@
 <x-layout>
-    <div class="card col-sm-10 mt-5 mx-auto">
-        <h3 class="card-header">Werk de informatie van uw huisdier bij</h3>
+    <div class="card container">
+        <section class="card-header">
+            <h3>Werk de informatie van uw huisdier bij</h3>
+        </section>
         <form action="{{ route('pets.update', $pet) }}" enctype="multipart/form-data" method="POST" class="m-2">
             @csrf
             @method('PUT')

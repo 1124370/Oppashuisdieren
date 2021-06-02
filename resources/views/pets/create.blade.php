@@ -1,6 +1,8 @@
 <x-layout>
-    <div class="card col-sm-10 mt-5 mx-auto">
-        <h3 class="card-header">Voeg je huisdier toe</h3>
+    <div class="card container">
+        <section class="card-header">
+            <h3>Voeg je huisdier toe</h3>
+        </section>
         <form action="{{ route('pets.store') }}" enctype="multipart/form-data" method="POST" class="m-2">
             @csrf
             <div class="mb-3">
@@ -33,9 +35,6 @@
                 <input type="number" name="hourly_rate" id="hourlyField" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Toevoegen</button>
-            @if ($errors->any())
-                <div class="alert alert-danger">{{ $errors->first() }}</div>
-            @endif
         </form>
     </div>
 </x-layout>
